@@ -3,11 +3,11 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     // 1. Container: Uses flex on mobile to ensure spacing, then switches to a 2-column grid on desktop.
-    <section id="home" className="w-full max-w-[1440px] min-h-[calc(100vh-100px)] mx-auto px-6 md:px-12 py-12 lg:py-0 flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-24 items-center justify-center">
+    <section id="home" className="w-full max-w-[1440px] min-h-[calc(100vh-100px)] mx-auto px-6 md:px-12 py-12 lg:py-0 flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-24 items-center justify-start lg:justify-center">
       
       {/* Left Column: Text & Search */}
       {/* Added pt-8 on mobile so it doesn't hug the navbar too tightly */}
-      <div className="flex flex-col gap-6 lg:gap-8 w-full pt-8 lg:pt-0">
+      <div className="flex flex-col gap-6 lg:gap-8 w-full pt-0 lg:pt-0">
         
         {/* 2. Fluid Typography: 
             Mobile (5xl) -> Tablet (6xl) -> Small Desktop (7xl) -> Large Desktop (84px) 
@@ -82,7 +82,7 @@ export default function HeroSection() {
           </div>
 
           {/* 4. Non-Bio (Bottom Center - Black) */}
-          <div className="group absolute top-[43%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-40 transition-transform hover:scale-105 hover:z-50 duration-300">
+          <div className="group absolute top-[43%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-40 transition-transform hover:scale-105 duration-300">
             <Image src="/images/nonbio.png" alt="Non-bio" width={500} height={500} className="object-contain drop-shadow-2xl" priority />
             
             {/* Tooltip Label */}
