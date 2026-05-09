@@ -20,16 +20,34 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const scrollToSection = (id: string) => {
+    setIsOpen(false); // Close mobile menu instantly on click
+
+    // SCENARIO 1: We are NOT on the Home Page (e.g. we are on /directory)
     if (pathname !== "/") {
-      router.push(`/#${id}`);
+      if (id === "home") {
+        router.push("/"); // Just go to the clean root URL to get the absolute top
+      } else {
+        router.push(`/#${id}`); // Go to the specific section on the home page
+      }
       clearHashAfterScroll();
-      setIsOpen(false);
       return;
     }
 
+    // SCENARIO 2: We ARE already on the Home Page
+    if (id === "home") {
+      // Always scroll to the absolute top of the document for Home
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+      clearHashAfterScroll();
+      return;
+    }
+
+    // SCENARIO 3: We are on the Home Page and clicking 'About' or another section
     const element = document.getElementById(id);
     if (element) {
-      const offset = 100;
+      const offset = 100; // Account for the sticky navbar height
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -42,7 +60,6 @@ export default function Navbar() {
 
       clearHashAfterScroll();
     }
-    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -68,7 +85,7 @@ export default function Navbar() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [pathname]);
+  }, [pathname]);   
 
   const navLinkStyles = (path: string, isPage = false) => {
     const isActive = isPage 
