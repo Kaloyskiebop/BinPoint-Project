@@ -8,17 +8,17 @@ export default function Navbar() {
       {/* Logo Area: A single streamlined brandmark */}
       <Link href="/" className="cursor-pointer">
         <Image 
-          src="/images/BinPoint-logo.png" // The brandmark shown above
-          alt="BinPoint Logo"
-          width={128}              
-          height={32}
-          priority               
-          className="object-fill"
+            src="/images/logo.png" 
+            alt="BinPoint Logo"
+            height={18} 
+            width={130} 
+            priority               
+            className="h-auto w-auto object-contain" // This ensures the aspect ratio stays perfect
         />
       </Link>
 
       {/* Navigation Links (Unchanged) */}
-      <div className="hidden md:flex gap-10 text-sm font-medium text-foreground font-body">
+      <div className="hidden md:flex gap-10 text-base font-medium text-foreground font-body">
         <Link href="/" className="border-b-2 border-foreground pb-1">
           Home
         </Link>
