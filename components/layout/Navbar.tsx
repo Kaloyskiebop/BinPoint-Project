@@ -8,41 +8,40 @@ import { usePathname, useRouter } from "next/navigation";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [pendingSection, setPendingSection] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
 
-  const scrollToSectionWithOffset = (id: string) => {
-    const element = document.getElementById(id);
-    if (!element) {
-      return;
-    }
-
-    const offset = 100;
-    const bodyRect = document.body.getBoundingClientRect().top;
-    const elementRect = element.getBoundingClientRect().top;
-    const elementPosition = elementRect - bodyRect;
-    const offsetPosition = elementPosition - offset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth"
-    });
-
-    window.history.replaceState(null, "", window.location.pathname);
+  const clearHashAfterScroll = () => {
+    window.setTimeout(() => {
+      window.history.replaceState(null, "", window.location.pathname);
+    }, 600);
   };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const scrollToSection = (id: string) => {
     if (pathname !== "/") {
-      setPendingSection(id);
-      router.push("/");
+      router.push(`/#${id}`);
+      clearHashAfterScroll();
       setIsOpen(false);
       return;
     }
 
-    scrollToSectionWithOffset(id);
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 100;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+
+      clearHashAfterScroll();
+    }
     setIsOpen(false);
   };
 
@@ -50,15 +49,6 @@ export default function Navbar() {
     if (pathname !== "/") {
       setActiveSection(""); 
       return;
-    }
-
-    if (pendingSection) {
-      const animationFrame = window.requestAnimationFrame(() => {
-        scrollToSectionWithOffset(pendingSection);
-        setPendingSection(null);
-      });
-
-      return () => window.cancelAnimationFrame(animationFrame);
     }
 
     const sections = document.querySelectorAll("section[id]");
@@ -78,7 +68,7 @@ export default function Navbar() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [pathname, pendingSection]);
+  }, [pathname]);
 
   const navLinkStyles = (path: string, isPage = false) => {
     const isActive = isPage ? pathname === path : activeSection === path;
