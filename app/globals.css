@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
   --color-background: #F8F9FA;
   --color-foreground: #1A1A1A;
   
-  /* Bin Colors */
   --color-bin-nonbio: #1E293B;
   --color-bin-recyclable: #F5A623;
   --color-bin-ewaste: #EF4444;
   --color-bin-bio: #10B981;
   
-  /* Map to our Next.js font variables */
+  /* We map the Next.js variables to Tailwind classes */
   --font-heading: var(--font-clash), sans-serif;
   --font-body: var(--font-archivo), sans-serif;
 }
