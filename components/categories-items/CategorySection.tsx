@@ -4,13 +4,21 @@ import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import wasteData from "@/data/wasteData.json";
 
+const colorMap: Record<string, string> = {
+  "bin-recyclable": "bg-bin-recyclable",
+  "bin-bio": "bg-bin-bio",
+  "bin-ewaste": "bg-bin-ewaste",
+  "bin-nonbio": "bg-bin-nonbio",
+};
+
+// 2. The Liquid Flood Animation
 const cardBackgroundVariants: Variants = {
   closed: {
     clipPath: "circle(0px at 35% 124px)", 
     opacity: 0,
     transition: {
       clipPath: { type: "spring", stiffness: 400, damping: 40 },
-      opacity: { duration: 0.2 } // Fades out quickly when mouse leaves
+      opacity: { duration: 0.2 } 
     },
   },
   open: {
@@ -18,7 +26,7 @@ const cardBackgroundVariants: Variants = {
     opacity: 1,
     transition: {
       clipPath: { type: "spring", stiffness: 25, restDelta: 1 },
-      opacity: { duration: 0.01 } // Instantly jumps to 100% solid color
+      opacity: { duration: 0.01 } 
     },
   },
 };
@@ -53,10 +61,10 @@ export default function CategorySection() {
               {/* CARD BASE */}
               <div className="relative bg-background rounded-[32px] pt-28 pb-10 px-8 shadow-[4px_4px_14.8px_4px_rgba(0,0,0,0.45)] h-full overflow-hidden">
                 
-                {/* THE LIQUID FLOOD LAYER */}
+                {/* THE LIQUID FLOOD LAYER (Safely using the colorMap) */}
                 <motion.div 
                   variants={cardBackgroundVariants}
-                  className={`absolute inset-0 bg-${cat.color} z-0`}
+                  className={`absolute inset-0 ${colorMap[cat.color]} z-0`}
                 />
 
                 {/* CONTENT LAYER */}
@@ -65,9 +73,9 @@ export default function CategorySection() {
                   {/* HEADER ROW: Centered flexbox */}
                   <div className="flex items-center justify-center gap-0 transition-all duration-500 ease-in-out group-hover:text-white">
                     
-                    {/* INDICATOR DOT: Disappears and shrinks to allow title to center */}
+                    {/* INDICATOR DOT: Safely using the colorMap */}
                     <motion.div 
-                      className={`rounded-full bg-${cat.color}`}
+                      className={`rounded-full ${colorMap[cat.color]}`}
                       variants={{ 
                         open: { 
                           opacity: 0, 
@@ -85,7 +93,7 @@ export default function CategorySection() {
                       transition={{ duration: 0.3 }}
                     />
                     
-                    <h4 className="font-heading text-2xl font-bold whitespace-nowrap">
+                    <h4 className="font-bold text-2xl font-bold whitespace-nowrap">
                       {cat.title}
                     </h4>
                   </div>

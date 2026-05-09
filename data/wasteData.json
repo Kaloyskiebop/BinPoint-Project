@@ -5,7 +5,7 @@
     "color": "bin-recyclable",
     "items": "Water bottles, milk tea cups, clean food containers.",
     "image": "/images/trash-plastics.png",
-    "imgScale": 1.3,
+    "imgScale": 1.2,
     "imgY": 16,
     "containerTop": "-top-20",
     "containerHeight": "h-40"
@@ -49,7 +49,7 @@
     "color": "bin-ewaste",
     "items": "Dead batteries, broken wires, light bulbs.",
     "image": "/images/trash-ewaste.png",
-    "imgScale": 1.3,
+    "imgScale": 1.1,
     "imgY": 0,
     "containerTop": "-top-24",
     "containerHeight": "h-48"

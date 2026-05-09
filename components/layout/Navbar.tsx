@@ -71,13 +71,16 @@ export default function Navbar() {
   }, [pathname]);
 
   const navLinkStyles = (path: string, isPage = false) => {
-    const isActive = isPage ? pathname === path : activeSection === path;
+    const isActive = isPage 
+        ? pathname === path || (path !== "/" && pathname.startsWith(path)) 
+        : activeSection === path;
+
     return `transition-all duration-300 pb-1 cursor-pointer ${
-      isActive 
-      ? "border-b-2 border-foreground text-foreground" 
-      : "text-foreground/60 hover:text-foreground/80 border-b-2 border-transparent"
+        isActive 
+        ? "border-b-2 border-foreground text-foreground" 
+        : "text-foreground/60 hover:text-foreground/80 border-b-2 border-transparent"
     }`;
-  };
+    };
 
   return (
     <nav className="w-full px-8 py-6 flex justify-between items-center max-w-[1440px] mx-auto bg-background sticky top-0 z-50">
