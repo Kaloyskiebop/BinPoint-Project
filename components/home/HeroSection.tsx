@@ -40,31 +40,57 @@ export default function HeroSection() {
       </div>
 
       {/* Right Column: The Diamond Cluster */}
-      {/* 3. Added pb-12 on mobile to give the cluster breathing room at the bottom of the screen */}
       <div className="relative w-full aspect-square flex items-center justify-center pb-12 lg:pb-0">
         
-        {/* 4. Fluid Cluster Sizing: 
-            Mobile (320px) -> Tablet (450px) -> Small Desktop (500px) -> Large Desktop (600px) */}
         <div className="relative w-full h-full max-w-[320px] sm:max-w-[450px] lg:max-w-[500px] xl:max-w-[600px] max-h-[320px] sm:max-h-[450px] lg:max-h-[500px] xl:max-h-[600px]">
           
-          {/* 1. Bio (Top Center) */}
-          <div className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-10 transition-transform hover:scale-105 duration-300">
+          {/* 1. Bio (Top Center - Green) */}
+          {/* Added 'group' to the wrapper and made sure hover:z-50 is on everything */}
+          <div className="group absolute top-[8%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-10 transition-transform hover:scale-105  duration-300">
             <Image src="/images/bio.png" alt="Bio" width={500} height={500} className="object-contain drop-shadow-xl" />
+            
+            {/* Tooltip Label */}
+            <div className="absolute top-[10%] right-[-25%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
+              <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-bio text-bin-bio font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
+                Biodegradable
+              </span>
+            </div>
           </div>
 
-          {/* 2. Recyclable (Middle Left) */}
-          <div className="absolute top-[25%] left-[-3%] w-[50%] h-auto z-20 transition-transform hover:scale-105 duration-300">
+          {/* 2. Recyclable (Middle Left - Yellow) */}
+          <div className="group absolute top-[25%] left-[-3%] w-[50%] h-auto z-20 transition-transform hover:scale-105 duration-300">
             <Image src="/images/recyclable.png" alt="Recyclable" width={500} height={500} className="object-contain drop-shadow-xl" />
+            
+            {/* Tooltip Label */}
+            <div className="absolute top-[10%] left-[20%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
+              <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-recyclable text-bin-recyclable font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
+                Recyclable
+              </span>
+            </div>
           </div>
 
-          {/* 3. E-Waste (Middle Right) */}
-          <div className="absolute top-[25%] right-[-3%] w-[50%] h-auto z-30 transition-transform hover:scale-105 duration-300">
+          {/* 3. E-Waste (Middle Right - Red) */}
+          <div className="group absolute top-[25%] right-[-3%] w-[50%] h-auto z-30 transition-transform hover:scale-105 duration-300">
             <Image src="/images/ewaste1.png" alt="E-waste" width={500} height={500} className="object-contain drop-shadow-xl" />
+            
+            {/* Tooltip Label */}
+            <div className="absolute top-[10%] right-[-15%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
+              <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-ewaste text-bin-ewaste font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
+                E-Waste
+              </span>
+            </div>
           </div>
 
-          {/* 4. Non-Bio (Bottom Center) */}
-          <div className="absolute top-[43%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-40 transition-transform hover:scale-105 hover:z-50 duration-300">
+          {/* 4. Non-Bio (Bottom Center - Black) */}
+          <div className="group absolute top-[43%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-40 transition-transform hover:scale-105 hover:z-50 duration-300">
             <Image src="/images/nonbio.png" alt="Non-bio" width={500} height={500} className="object-contain drop-shadow-2xl" />
+            
+            {/* Tooltip Label */}
+            <div className="absolute top-[10%] left-[20%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
+              <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-nonbio text-bin-nonbio font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
+                Non-Biodegradable
+              </span>
+            </div>
           </div>
 
         </div>
