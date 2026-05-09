@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     // 1. Container: Uses flex on mobile to ensure spacing, then switches to a 2-column grid on desktop.
-    <section className="w-full max-w-[1440px] min-h-[calc(100vh-100px)] mx-auto px-6 md:px-12 py-12 lg:py-0 flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-24 items-center justify-center">
+    <section id="home" className="w-full max-w-[1440px] min-h-[calc(100vh-100px)] mx-auto px-6 md:px-12 py-12 lg:py-0 flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-24 items-center justify-center">
       
       {/* Left Column: Text & Search */}
       {/* Added pt-8 on mobile so it doesn't hug the navbar too tightly */}
