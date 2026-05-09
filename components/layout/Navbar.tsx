@@ -13,7 +13,7 @@ export default function Navbar() {
             height={18} 
             width={130} 
             priority               
-            className="h-auto w-auto object-contain" // This ensures the aspect ratio stays perfect
+            className="h-10 w-auto object-contain" // This ensures the aspect ratio stays perfect
         />
       </Link>
 
