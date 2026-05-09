@@ -81,7 +81,7 @@ export default function Navbar() {
           Home
         </button>
         <button onClick={() => scrollToSection("about")} className={navLinkStyles("about")}>
-          About us
+          About
         </button>
         
         <Link href="/directory" className="text-foreground/60 hover:text-foreground/80 transition-colors pb-1 border-b-2 border-transparent">

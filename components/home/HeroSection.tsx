@@ -47,7 +47,7 @@ export default function HeroSection() {
           {/* 1. Bio (Top Center - Green) */}
           {/* Added 'group' to the wrapper and made sure hover:z-50 is on everything */}
           <div className="group absolute top-[8%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-10 transition-transform hover:scale-105  duration-300">
-            <Image src="/images/bio.png" alt="Bio" width={500} height={500} className="object-contain drop-shadow-xl" />
+            <Image src="/images/bio.png" alt="Bio" width={500} height={500} className="object-contain drop-shadow-xl" priority />
             
             {/* Tooltip Label */}
             <div className="absolute top-[10%] right-[-25%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
@@ -59,7 +59,7 @@ export default function HeroSection() {
 
           {/* 2. Recyclable (Middle Left - Yellow) */}
           <div className="group absolute top-[25%] left-[-3%] w-[50%] h-auto z-20 transition-transform hover:scale-105 duration-300">
-            <Image src="/images/recyclable.png" alt="Recyclable" width={500} height={500} className="object-contain drop-shadow-xl" />
+            <Image src="/images/recyclable.png" alt="Recyclable" width={500} height={500} className="object-contain drop-shadow-xl" priority />
             
             {/* Tooltip Label */}
             <div className="absolute top-[10%] left-[20%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
@@ -71,7 +71,7 @@ export default function HeroSection() {
 
           {/* 3. E-Waste (Middle Right - Red) */}
           <div className="group absolute top-[25%] right-[-3%] w-[50%] h-auto z-30 transition-transform hover:scale-105 duration-300">
-            <Image src="/images/ewaste1.png" alt="E-waste" width={500} height={500} className="object-contain drop-shadow-xl" />
+            <Image src="/images/ewaste1.png" alt="E-waste" width={500} height={500} className="object-contain drop-shadow-xl" priority />
             
             {/* Tooltip Label */}
             <div className="absolute top-[10%] right-[-15%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
@@ -83,7 +83,7 @@ export default function HeroSection() {
 
           {/* 4. Non-Bio (Bottom Center - Black) */}
           <div className="group absolute top-[43%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-40 transition-transform hover:scale-105 hover:z-50 duration-300">
-            <Image src="/images/nonbio.png" alt="Non-bio" width={500} height={500} className="object-contain drop-shadow-2xl" />
+            <Image src="/images/nonbio.png" alt="Non-bio" width={500} height={500} className="object-contain drop-shadow-2xl" priority />
             
             {/* Tooltip Label */}
             <div className="absolute top-[10%] left-[20%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
