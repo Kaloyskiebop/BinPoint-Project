@@ -1,39 +1,18 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 
-// 1. Setup Archivo (Loading your local .otf files)
-const archivo = localFont({
-  src: [
-    {
-      path: "../fonts/Archivo/Archivo-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Archivo/Archivo-Bold.otf",
-      weight: "700",
-      style: "normal",
-    }
-  ],
+// 1. Fetch Archivo directly from Google (100% reliable)
+const archivo = Archivo({ 
+  subsets: ["latin"],
   variable: "--font-archivo",
   display: "swap",
 });
 
-// 2. Setup Clash Display (Loading your local .otf files)
+// 2. Load your Variable TTF file
 const clash = localFont({
-  src: [
-    {
-      path: "../fonts/Clash-display/ClashDisplay-Medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Clash-display/ClashDisplay-Bold.otf",
-      weight: "700",
-      style: "normal",
-    }
-  ],
+  src: "../fonts/Clash-display/ClashDisplay-Variable.ttf",
   variable: "--font-clash",
   display: "swap",
 });
@@ -50,6 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
+      {/* We inject both font variables into the body tag here */}
       <body className={`${archivo.variable} ${clash.variable} font-body bg-background text-foreground antialiased min-h-full flex flex-col`}>
         {children}
       </body>
