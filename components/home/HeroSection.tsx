@@ -25,14 +25,16 @@ export default function HeroSection() {
         {/* Search Bar */}
         <div className="relative w-full max-w-lg mt-2 lg:mt-4">
           <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-            <svg className="h-5 w-5 lg:h-6 lg:w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Changed: text-gray-400 is now text-foreground/40 */}
+            <svg className="h-5 w-5 lg:h-6 lg:w-6 text-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
           <input
             type="text"
             placeholder="What are you throwing away?"
-            className="w-full pl-12 lg:pl-14 pr-6 py-3.5 lg:py-4 rounded-xl border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground shadow-sm transition-all font-body text-sm lg:text-lg placeholder:text-gray-400"
+            // Changed: bg-white -> bg-background, borders and placeholders use foreground opacities
+            className="w-full pl-12 lg:pl-14 pr-6 py-3.5 lg:py-4 rounded-xl border border-foreground/20 bg-background focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground shadow-sm transition-all font-body text-sm lg:text-lg placeholder:text-foreground/40"
           />
         </div>
       </div>
