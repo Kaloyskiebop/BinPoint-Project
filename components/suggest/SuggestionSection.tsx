@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-// 1. Color mapping using your exact brand hex codes!
 const categoryColors: Record<string, string> = {
   "Biodegradable": "bg-[#10B981] text-white border-[#10B981]",
   "Non-Biodegradable": "bg-[#1E293B] text-white border-[#1E293B]",
-  "Recyclable": "bg-[#F5A623] text-zinc-900 border-[#F5A623]", // Dark text for contrast against the yellow/orange
+  "Recyclable": "bg-[#F5A623] text-zinc-900 border-[#F5A623]", 
   "E-Waste": "bg-[#EF4444] text-white border-[#EF4444]",
 };
+
+// --- RATE LIMIT SETTINGS ---
+const MAX_SUGGESTIONS_PER_HOUR = 3;
+const TIME_WINDOW_MS = 60 * 60 * 1000; // 1 hour in milliseconds
 
 export default function SuggestionSection() {
   const [itemName, setItemName] = useState("");
@@ -42,8 +45,23 @@ export default function SuggestionSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!itemName || !category) {
       setStatusMsg("Please provide an item name and select a category.");
+      return;
+    }
+
+    // --- 1. RATE LIMIT CHECK ---
+    const now = Date.now();
+    const storedData = localStorage.getItem("bp_suggestion_timestamps");
+    let timestamps: number[] = storedData ? JSON.parse(storedData) : [];
+
+    // Filter out timestamps that are older than 1 hour
+    timestamps = timestamps.filter((t) => now - t < TIME_WINDOW_MS);
+
+    // If they have 3 or more recent timestamps, block the submission!
+    if (timestamps.length >= MAX_SUGGESTIONS_PER_HOUR) {
+      setStatusMsg("You've reached the limit of 3 suggestions per hour. Please try again later!");
       return;
     }
 
@@ -87,6 +105,10 @@ export default function SuggestionSection() {
 
       if (dbError) throw dbError;
 
+      // --- 2. UPDATE RATE LIMIT HISTORY ON SUCCESS ---
+      timestamps.push(now);
+      localStorage.setItem("bp_suggestion_timestamps", JSON.stringify(timestamps));
+
       setStatusMsg("Suggestion sent successfully! Thank you.");
       setItemName("");
       setCategory("");
@@ -101,10 +123,10 @@ export default function SuggestionSection() {
   };
 
   return (
-    <section className="min-h-[calc(100vh-100px)] bg-background pt-2 pb-12 px-6 flex flex-col items-center">
+    <section className="min-h-[calc(100vh-100px)] bg-background pt-4 pb-12 px-6 flex flex-col items-center">
       
       {/* Header Section */}
-      <div className="text-center max-w-2xl mb-12 mt-8">
+      <div className="text-center max-w-2xl mb-4 mt-4">
         <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
           Help Us Grow!
         </h1>
@@ -164,13 +186,11 @@ export default function SuggestionSection() {
               Add a photo (Optional)
             </label>
             
-            {/* Conditional Rendering: Show Remove Box if file exists, else show Upload Box */}
             {file ? (
               <div className="flex items-center justify-between w-full p-4 rounded-xl border border-foreground/20 bg-foreground/5 transition-all">
                 <p className="text-sm text-[#4A85F6] font-medium font-body truncate max-w-[80%]">
                   {file.name}
                 </p>
-                {/* Remove Image Button */}
                 <button
                   type="button"
                   onClick={() => setFile(null)}
@@ -205,7 +225,7 @@ export default function SuggestionSection() {
           {statusMsg && (
             <p className={`text-sm text-center font-body font-medium ${
               statusMsg.includes("successfully") ? "text-green-600" : 
-              statusMsg.includes("large") ? "text-red-500" : "text-foreground/70"
+              statusMsg.includes("limit") || statusMsg.includes("large") ? "text-red-500" : "text-foreground/70"
             }`}>
               {statusMsg}
             </p>
