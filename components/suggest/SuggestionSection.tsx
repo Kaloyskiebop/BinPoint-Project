@@ -3,6 +3,14 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
+// 1. Color mapping using your exact brand hex codes!
+const categoryColors: Record<string, string> = {
+  "Biodegradable": "bg-[#10B981] text-white border-[#10B981]",
+  "Non-Biodegradable": "bg-[#1E293B] text-white border-[#1E293B]",
+  "Recyclable": "bg-[#F5A623] text-zinc-900 border-[#F5A623]", // Dark text for contrast against the yellow/orange
+  "E-Waste": "bg-[#EF4444] text-white border-[#EF4444]",
+};
+
 export default function SuggestionSection() {
   const [itemName, setItemName] = useState("");
   const [category, setCategory] = useState("");
@@ -16,6 +24,21 @@ export default function SuggestionSection() {
     "Recyclable",
     "E-Waste",
   ];
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0] || null;
+    
+    if (selectedFile) {
+      if (selectedFile.size > 10485760) {
+        setStatusMsg("File is too large. Please select an image under 10MB.");
+        setFile(null); 
+        return;
+      }
+      
+      setFile(selectedFile);
+      setStatusMsg(""); 
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,7 +130,7 @@ export default function SuggestionSection() {
               type="text"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-foreground/20 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 font-body transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-foreground/20 focus:outline-none focus:ring-2 focus:ring-[#4A85F6]/50 focus:border-[#4A85F6] font-body transition-all"
               placeholder="e.g. Broken umbrella"
             />
           </div>
@@ -125,8 +148,8 @@ export default function SuggestionSection() {
                   onClick={() => setCategory(cat)}
                   className={`py-3 px-2 rounded-xl border font-body text-sm font-medium transition-all ${
                     category === cat
-                      ? "border-blue-500 bg-blue-50 text-blue-600"
-                      : "border-foreground/20 text-foreground/70 hover:border-foreground/40"
+                      ? categoryColors[cat]
+                      : "border-foreground/20 text-foreground/70 hover:border-foreground/40 hover:bg-foreground/5"
                   }`}
                 >
                   {cat}
@@ -140,30 +163,50 @@ export default function SuggestionSection() {
             <label className="font-body text-sm text-foreground/80">
               Add a photo (Optional)
             </label>
-            <label className="flex flex-col items-center justify-center w-full h-24 rounded-xl border-2 border-dashed border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 cursor-pointer transition-all">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                {file ? (
-                  <p className="text-sm text-blue-500 font-medium font-body truncate px-4 max-w-full">
-                    {file.name}
-                  </p>
-                ) : (
+            
+            {/* Conditional Rendering: Show Remove Box if file exists, else show Upload Box */}
+            {file ? (
+              <div className="flex items-center justify-between w-full p-4 rounded-xl border border-foreground/20 bg-foreground/5 transition-all">
+                <p className="text-sm text-[#4A85F6] font-medium font-body truncate max-w-[80%]">
+                  {file.name}
+                </p>
+                {/* Remove Image Button */}
+                <button
+                  type="button"
+                  onClick={() => setFile(null)}
+                  className="text-foreground/40 hover:text-red-500 transition-colors p-1"
+                  aria-label="Remove selected image"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <label className="flex flex-col items-center justify-center w-full h-24 rounded-xl border-2 border-dashed border-foreground/20 hover:border-foreground/40 hover:bg-foreground/5 cursor-pointer transition-all">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   <svg className="w-8 h-8 text-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
-                )}
-              </div>
-              <input 
-                type="file" 
-                accept="image/*"
-                className="hidden" 
-                onChange={(e) => setFile(e.target.files?.[0] || null)}
-              />
-            </label>
+                </div>
+                <input 
+                  type="file" 
+                  accept="image/*"
+                  className="hidden" 
+                  onChange={handleFileChange}
+                />
+              </label>
+            )}
+            
+            <span className="text-xs text-foreground/50 text-right mt-1">Max size: 10MB</span>
           </div>
 
           {/* Status Message */}
           {statusMsg && (
-            <p className={`text-sm text-center font-body font-medium ${statusMsg.includes("success") ? "text-green-600" : "text-foreground/70"}`}>
+            <p className={`text-sm text-center font-body font-medium ${
+              statusMsg.includes("successfully") ? "text-green-600" : 
+              statusMsg.includes("large") ? "text-red-500" : "text-foreground/70"
+            }`}>
               {statusMsg}
             </p>
           )}
