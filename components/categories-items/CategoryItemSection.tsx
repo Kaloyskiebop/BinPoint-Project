@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion"; // <-- NEW IMPORT
+import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
-// 1. Updated Interface to support the new item details
+// 1. Updated Interface to support the new item details and smart tags
 interface TrashItem {
   name: string;
   image: string;
   description?: string;
   prepNotes?: string[];
+  tags?: string[];
 }
 
 interface CategoryData {
@@ -37,10 +39,29 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
   
   // Tracks which item card the user clicked on
   const [selectedItem, setSelectedItem] = useState<TrashItem | null>(null);
+  
+  const searchParams = useSearchParams();
+  const itemNameFromURL = searchParams.get("item");
 
-  const filteredItems = categoryData.itemsList.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // AUTOMATICALLY open the item if it exists in the URL
+  useEffect(() => {
+    if (itemNameFromURL) {
+      const foundItem = categoryData.itemsList.find(
+        (item) => item.name.toLowerCase() === itemNameFromURL.toLowerCase()
+      );
+      if (foundItem) {
+        setSelectedItem(foundItem);
+      }
+    }
+  }, [itemNameFromURL, categoryData]);
+
+  // 2. The Smart Search Engine: Looks at BOTH name and hidden tags
+  const filteredItems = categoryData.itemsList.filter((item) => {
+    const searchLower = searchQuery.toLowerCase();
+    const matchesName = item.name.toLowerCase().includes(searchLower);
+    const matchesTag = item.tags?.some((tag) => tag.toLowerCase().includes(searchLower));
+    return matchesName || matchesTag;
+  });
 
   return (
     <section className="w-full max-w-[1440px] mx-auto px-6 py-8 md:py-12 min-h-[calc(100vh-100px)] relative">
@@ -58,7 +79,6 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
         
         {/* LEFT COLUMN: The Dynamic Context/Details Card (Sticky on Desktop) */}
-        {/* Hidden on mobile when an item is selected, so it doesn't distract from the drawer */}
         <div className={`w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden relative transition-all duration-300 lg:sticky lg:top-8 ${selectedItem ? "hidden lg:block" : "block"}`}>
           
           {/* Close Button (Desktop Only) */}
@@ -168,7 +188,6 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
           </div>
 
           {filteredItems.length > 0 ? (
-            // MOBILE SCROLL FIX: Added max-h-[60vh] and overflow-y-auto, while hiding the scrollbar visually for a cleaner look
             <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 max-h-[60vh] overflow-y-auto lg:max-h-none lg:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {filteredItems.map((item, index) => {
                 const isActive = selectedItem?.name === item.name;
@@ -240,13 +259,10 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               drag="y"
-              
-              // 1. UPDATED: Resist dragging UP, but allow free dragging DOWN
               dragConstraints={{ top: 0, bottom: 0 }} 
               dragElastic={{ top: 0.1, bottom: 1 }} 
-              
               onDragEnd={(e, info) => {
-                // 2. UPDATED: Close if dragged down 100px OR if flicked down quickly (> 500 velocity)
+                // Close if dragged down 100px OR if flicked down quickly (> 500 velocity)
                 if (info.offset.y > 100 || info.velocity.y > 500) {
                   setSelectedItem(null);
                 }

@@ -5,12 +5,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import wasteData from "@/data/wasteData.json";
 
+// 1. UPDATED: Now grabs the 'tags' array from the new JSON structure
 const allSearchableItems = wasteData.flatMap((category) => 
   category.itemsList.map((item) => {
-    const actualName = typeof item === 'string' ? item : item.name;
-    
     return {
-      name: actualName,
+      name: item.name,
+      tags: item.tags || [], // Grab tags (or empty array if none)
       categoryId: category.id,
       categoryTitle: category.title,
       color: category.color
@@ -31,9 +31,13 @@ export default function HeroSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const filteredItems = allSearchableItems.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // 2. UPDATED: Smart Search (checks both Name and Tags)
+  const filteredItems = allSearchableItems.filter((item) => {
+    const searchLower = searchTerm.toLowerCase();
+    const matchesName = item.name.toLowerCase().includes(searchLower);
+    const matchesTag = item.tags.some((tag) => tag.toLowerCase().includes(searchLower));
+    return matchesName || matchesTag;
+  });
 
   return (
     <section id="home" className="w-full max-w-[1440px] min-h-[calc(100vh-100px)] mx-auto px-6 md:px-12 py-12 lg:py-0 flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-8 xl:gap-24 items-center justify-start lg:justify-center">
@@ -85,7 +89,7 @@ export default function HeroSection() {
                   {filteredItems.map((item, index) => (
                     <li 
                         key={index}
-                        onMouseDown={() => router.push(`/directory/${item.categoryId}`)}
+                        onMouseDown={() => router.push(`/directory/${item.categoryId}?item=${encodeURIComponent(item.name)}`)}
                         // justify-between automatically pushes the text to opposite sides!
                         className="px-6 py-3 hover:bg-foreground/5 cursor-pointer flex items-center justify-between transition-colors group"
                     >
