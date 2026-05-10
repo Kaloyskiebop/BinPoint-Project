@@ -7,31 +7,51 @@
     "items": "Water bottles, milk tea cups, clean food containers.",
     "description": "Only clean, rigid plastics belong here. If the item holds its shape (like a bottle or a cup), drop it in. Make sure to empty all liquids and food residue first.",
     "note": "Note: Soft, crinkly plastics like wrappers and sachets go in the Non-Biodegradable (Black) bin.",
+    "heroImage": "/images/heroes/plastics-hero.png",
+    "image": "/images/categories/trash-plastics.png",
+    "imgScale": 1.2,
+    "imgY": 16,
+    "containerTop": "-top-20",
+    "containerHeight": "h-40",
     "itemsList": [
       { 
         "name": "Plastic Water Bottle", 
         "image": "/images/items/plastics/plastic-water-bottles.png",
         "description": "Clear plastic bottles (PET) are highly recyclable. Please prep them before throwing them away to maximize bin space!",
+        "tags": ["nature's spring", "mineral water", "wilkins", "absolute"],
         "prepNotes": [
           "Empty: Pour out any leftover water (liquids ruin other recyclables!).",
           "Crush: Twist or flatten the bottle to save space.",
-          "Cap: Screw the cap back on to keep the bottle crushed (caps are recyclable too)."
+          "Cap: Screw the cap back on to keep the bottle crushed."
+        ]
+      },
+      { 
+        "name": "Plastic Soda Bottle", 
+        "image": "/images/items/plastics/soda-bottles.jpg",
+        "description": "Just like water bottles, plastic soda bottles are highly valuable for recycling. Because soda is sticky, a little extra care is needed.",
+        "tags": ["coke", "sprite", "royal", "softdrinks", "mountain dew"],
+        "prepNotes": [
+          "Empty: Pour out any leftover soda completely.",
+          "Rinse: Give it a quick swirl with water to remove the sticky syrup.",
+          "Crush & Cap: Squeeze the air out to flatten the bottle, then screw the cap back on."
         ]
       },
       { 
         "name": "Milk Tea Cup", 
         "image": "/images/items/plastics/milktea-cup.png",
         "description": "Thick plastic cups used for milk tea are recyclable, but the sugary residue and plastic sealing film can contaminate the recycling batch.",
+        "tags": ["boba", "coco", "macao", "pearls", "serenitea"],
         "prepNotes": [
-          "Empty: Pour out all leftover tea, ice, and tapioca pearls into the sink or compost.",
+          "Empty: Pour out all leftover tea, ice, and tapioca pearls.",
           "Remove Film: Peel off the soft plastic sealing film (this goes in the Non-Biodegradable bin).",
-          "Rinse: Give the cup a quick rinse to remove sticky sugar."
+          "Rinse: Give the cup a quick rinse."
         ]
       },
       { 
-        "name": "Plastic Spoon/Fork", 
+        "name": "Plastic Spoon & Fork", 
         "image": "/images/items/plastics/plastic-cutlery.jpg",
-        "description": "Rigid plastic cutlery can be recycled, but they must be completely free of food residue. (Note: Extremely flimsy plastic spoons may need to go to Non-Biodegradable depending on local facilities).",
+        "description": "Rigid plastic cutlery can be recycled, but they must be completely free of food residue.",
+        "tags": ["kutsara", "tinidor", "takeout spoon", "jollibee spoon"],
         "prepNotes": [
           "Wipe or Rinse: Wash off all oils, sauces, and food bits.",
           "Dry: Shake off excess water before tossing them in the bin."
@@ -41,88 +61,329 @@
         "name": "Clean Food Tupperware", 
         "image": "/images/items/plastics/tupperware.png",
         "description": "Heavy-duty microwaveable plastic tubs (like the ones from takeout restaurants) are excellent for recycling, provided they are not greasy.",
+        "tags": ["takeout container", "plastic tub", "microwave safe", "food box"],
         "prepNotes": [
           "Wash: Thoroughly wash with soap and water to remove all oil. Oil ruins the plastic recycling process.",
-          "Dry: Ensure the container is fully dry.",
           "Separate: Detach the lid from the base before throwing them in."
         ]
-      },
-      { 
-        "name": "Plastic Soda Bottle", 
-        "image": "/images/items/plastics/soda-bottles.jpg",
-        "description": "Just like water bottles, plastic soda bottles are highly valuable for recycling. Because soda is sticky, a little extra care is needed to keep the recycling bin clean and pest-free.",
-        "prepNotes": [
-          "Empty: Pour out any leftover soda completely into the sink.",
-          "Rinse: Give it a quick swirl with water to remove the sticky syrup.",
-          "Crush & Cap: Squeeze the air out to flatten the bottle, then screw the cap back on to save space and keep the cap in the recycling loop."
-        ]
       }
-    ],
-    "heroImage": "/images/items/plastics/plastics-hero-card.jpg",
-    "image": "/images/trash-plastics.png",
-    "imgScale": 1.2,
-    "imgY": 16,
-    "containerTop": "-top-20",
-    "containerHeight": "h-40"
+    ]
   },
   {
     "id": "paper",
     "title": "Paper",
     "color": "bin-recyclable",
+    "categoryTitle": "Recyclable",
     "items": "Scratch paper, modules, cardboard, receipts.",
-    "itemsList": ["Scratch Paper", "Test Module", "Cardboard Box", "Store Receipt", "Newspaper", "Paper Bag"],
-    "image": "/images/trash-paper.png",
+    "description": "Clean, dry paper products belong here. Paper fibers are highly recyclable as long as they are not ruined by food grease or moisture.",
+    "note": "Note: Wet paper or heavily greasy boxes (like pizza boxes) go to Residual Waste.",
+    "heroImage": "/images/heroes/paper-hero.png",
+    "image": "/images/categories/trash-paper.png",
     "imgScale": 1.2,
     "imgY": 0,
     "containerTop": "-top-24",
-    "containerHeight": "h-48"
+    "containerHeight": "h-48",
+    "itemsList": [
+      {
+        "name": "Cardboard Boxes",
+        "image": "/images/items/paper/cardboard.jpg",
+        "description": "Corrugated cardboard boxes from deliveries or appliances are highly valuable.",
+        "tags": ["shopee", "lazada", "box", "carton", "balikbayan"],
+        "prepNotes": [
+          "Flatten: Break down the box completely to save space.",
+          "Keep Dry: Wet or greasy cardboard cannot be recycled and goes to Residual."
+        ]
+      },
+      {
+        "name": "Scratch & Bond Paper",
+        "image": "/images/items/paper/scratchpaper.png",
+        "description": "Used printer paper, loose-leaf bond paper, and notebook pages.",
+        "tags": ["bond paper", "notebook", "test paper", "scratch", "office paper"],
+        "prepNotes": [
+          "Remove Metal: Take out heavy binder clips or staples if possible.",
+          "Keep Dry: Paper must be completely dry."
+        ]
+      },
+      {
+        "name": "Newspaper",
+        "image": "/images/items/paper/newspaper.jpeg",
+        "description": "Standard daily newspapers and broadsheets are fully recyclable.",
+        "tags": ["dyaryo", "broadsheet", "tabloid", "news"],
+        "prepNotes": [
+          "Stack: Tie them in neat bundles if disposing of a large amount so they don't blow away."
+        ]
+      },
+      {
+        "name": "Glossy Magazines",
+        "image": "/images/items/paper/magazines.png",
+        "description": "Glossy magazines, catalogs, and brochures are recyclable as long as they are clean.",
+        "tags": ["magazine", "komiks", "brochure", "catalog", "glossy"],
+        "prepNotes": [
+          "Keep Dry: Ensure they are not wet or soiled."
+        ]
+      },
+      {
+        "name": "Paper Bags",
+        "image": "/images/items/paper/paperbag.png",
+        "description": "Standard brown or white paper grocery bags.",
+        "tags": ["mcdo bag", "grocery bag", "brown bag", "shopping bag", "paper bag"],
+        "prepNotes": [
+          "Fold: Fold them flat to save space in the bin.",
+          "Check for Grease: If the bottom is soaked in fast-food oil, it goes to Residual."
+        ]
+      },
+      {
+        "name": "Thermal Receipts",
+        "image": "/images/items/paper/receipt.jpg",
+        "description": "Store and ATM receipts are printed on thermal paper, which contains chemicals (like BPA) that contaminate paper recycling.",
+        "tags": ["atm", "grocery", "resibo", "sm ticket", "receipt"],
+        "prepNotes": [
+          "Throw in Residual: Do NOT put these in the recyclable bin. They go straight to Non-Biodegradable/Residual waste."
+        ]
+      }
+    ]
   },
   {
     "id": "cans-glass",
     "title": "Cans & Glass",
     "color": "bin-recyclable",
+    "categoryTitle": "Recyclable",
     "items": "Soda cans, glass bottles, metal caps.",
-    "itemsList": ["Soda Can", "Glass Bottle", "Metal Bottle Cap", "Canned Goods", "Energy Drink Can"],
-    "image": "/images/trash-cans.png",
+    "description": "Metal cans and glass containers. These materials are incredibly valuable because they can be melted down and recycled infinitely without losing quality.",
+    "note": "Note: Broken glass should be wrapped in thick newspaper and labeled before disposal to protect waste collectors.",
+    "heroImage": "/images/heroes/cans-and-glass-hero1.png",
+    "image": "/images/categories/trash-cans.png",
     "imgScale": 1.25,
     "imgY": -8,
     "containerTop": "-top-20",
-    "containerHeight": "h-40"
+    "containerHeight": "h-40",
+    "itemsList": [
+      {
+        "name": "Aluminum Soda Cans",
+        "image": "/images/items/cans-and-glass/aluminum-soda-bottles.png",
+        "description": "Aluminum is infinitely recyclable and one of the most valuable materials in the bin.",
+        "tags": ["coke can", "sprite can", "royal can", "beer can", "san miguel"],
+        "prepNotes": [
+          "Empty: Pour out remaining liquids.",
+          "Crush: Step on the can to flatten it and save space."
+        ]
+      },
+      {
+        "name": "Glass Bottles",
+        "image": "/images/items/cans-and-glass/glass-bottles.png",
+        "description": "Glass bottles (like beer, wine, or soy sauce bottles) are fully recyclable but must be handled carefully.",
+        "tags": ["beer bottle", "wine bottle", "soy sauce", "ketchup bottle", "red horse"],
+        "prepNotes": [
+          "Rinse: Wash out sticky residue.",
+          "Be Careful: Place gently in the bin so it does not shatter."
+        ]
+      },
+      {
+        "name": "Tin Food Cans",
+        "image": "/images/items/cans-and-glass/tin-cans.png",
+        "description": "Steel and tin cans used for sardines, corned beef, and evaporated milk.",
+        "tags": ["sardines", "corned beef", "evap", "century tuna", "555", "lata"],
+        "prepNotes": [
+          "Rinse: Wash out leftover oils and food to prevent pests.",
+          "Push Lid: If the sharp metal lid is still attached, push it inside the can so nobody gets cut."
+        ]
+      },
+      {
+        "name": "Metal Bottle Caps",
+        "image": "/images/items/cans-and-glass/metal-tin-caps.png",
+        "description": "Small metal crowns from glass soda or beer bottles.",
+        "tags": ["tansan", "crown", "cap", "beer cap"],
+        "prepNotes": [
+          "Collect: Toss them loosely into the cans/glass bin."
+        ]
+      }
+    ]
   },
   {
     "id": "food-waste",
     "title": "Food Waste",
     "color": "bin-bio",
+    "categoryTitle": "Biodegradable",
     "items": "Leftover rice, fruit peels, coffee grounds.",
-    "itemsList": ["Apple Core", "Leftover Rice", "Banana Peel", "Coffee Grounds", "Chicken Bones", "Tea Bags"],
-    "image": "/images/trash-food.png",
+    "description": "Organic matter that will decompose naturally. This includes food scraps, yard trimmings, and compostable materials.",
+    "note": "Note: Avoid pouring large amounts of cooking oil or soup broth directly into the bin.",
+    "heroImage": "/images/heroes/food-waste-hero.png",
+    "image": "/images/categories/trash-food.png",
     "imgScale": 1.2,
     "imgY": -8,
     "containerTop": "-top-20",
-    "containerHeight": "h-40"
+    "containerHeight": "h-40",
+    "itemsList": [
+      { 
+        "name": "Leftover Rice", 
+        "image": "/images/items/food-waste/leftover-rice.png",
+        "description": "Spoiled or leftover rice is fully compostable.",
+        "tags": ["kanin", "chao fan", "fried rice", "spoiled", "panis", "grains"],
+        "prepNotes": [
+          "Drain Fluids: Do not dump oily broths or soups directly into the bin.",
+          "Separate: Ensure no plastic spoons or takeout container pieces are mixed in."
+        ]
+      },
+      { 
+        "name": "Bones & Meat", 
+        "image": "/images/items/food-waste/bones-meat.png",
+        "description": "Leftover fried chicken bones, pork ribs, and meat trimmings belong in the biodegradable bin.",
+        "tags": ["chickenjoy", "fried chicken", "pork", "beef", "fish bones", "buto", "scraps"],
+        "prepNotes": [
+          "Wrap if Odorous: If your local collection takes a few days, wrap meat scraps in old newspaper to minimize flies."
+        ]
+      },
+      { 
+        "name": "Fruit Peels", 
+        "image": "/images/items/food-waste/fruit-peels.png",
+        "description": "Banana peels, mango skins, and apple cores break down naturally and are perfect for compost.",
+        "tags": ["banana", "mango", "papaya", "apple", "balat"],
+        "prepNotes": [
+          "Remove Stickers: Peel off those tiny plastic fruit stickers first (they go to Residual)!"
+        ]
+      },
+      { 
+        "name": "Coconut Shells", 
+        "image": "/images/items/food-waste/coconut-shells.png",
+        "description": "Harder organic materials like coconut shells and copra scraps.",
+        "tags": ["coconut", "copra", "buko", "husk"],
+        "prepNotes": [
+          "Chop: For large items like coconut husks, chopping them speeds up decomposition if composting at home."
+        ]
+      },
+      { 
+        "name": "Used Coffee Grounds", 
+        "image": "/images/items/food-waste/coffee-grounds.png",
+        "description": "Used coffee grounds are excellent for compost and garden soil.",
+        "tags": ["kape", "barako", "espresso", "grounds"],
+        "prepNotes": [
+          "Cool Down: Let hot coffee grounds cool before throwing them away."
+        ]
+      },
+      { 
+        "name": "Used Tea Bags", 
+        "image": "/images/items/food-waste/tea-bags.png",
+        "description": "Paper tea bags will decompose naturally.",
+        "tags": ["lipton", "tea", "chamomile", "green tea"],
+        "prepNotes": [
+          "Check for Plastic: Some premium pyramid tea bags are made of plastic mesh. If it feels like plastic, it goes to Residual waste."
+        ]
+      }
+    ]
   },
   {
     "id": "e-waste",
     "title": "E-Waste",
     "color": "bin-ewaste",
+    "categoryTitle": "Hazardous",
     "items": "Dead batteries, broken wires, light bulbs.",
-    "itemsList": ["AA Battery", "Broken Charging Cable", "Old Earphones", "Burnt Light Bulb", "Broken Calculator"],
-    "image": "/images/trash-ewaste.png",
+    "description": "Electronic devices, batteries, and appliances. These contain toxic materials and heavy metals that require special handling.",
+    "note": "Note: Do not mix e-waste with regular trash to prevent chemical leaks into the soil.",
+    "heroImage": "/images/heroes/ewaste-hero.png",
+    "image": "/images/categories/trash-ewaste.png",
     "imgScale": 1.1,
     "imgY": 0,
     "containerTop": "-top-24",
-    "containerHeight": "h-48"
+    "containerHeight": "h-48",
+    "itemsList": [
+      {
+        "name": "Household Batteries",
+        "image": "/images/items/e-waste/household-batteries.png",
+        "description": "Dead AA, AAA, and button cell batteries contain toxic chemicals and must NEVER be thrown in regular trash.",
+        "tags": ["aa", "aaa", "energizer", "duracell", "remote", "watch battery"],
+        "prepNotes": [
+          "Store Safely: Keep them in a dry, sealed container until you can drop them at a local e-waste collection point."
+        ]
+      },
+      {
+        "name": "Broken Cables & Wires",
+        "image": "/images/items/e-waste/broken-cables-wires.png",
+        "description": "Old phone chargers, earphones, and extension cords contain valuable copper.",
+        "tags": ["charger", "usb", "lightning", "earphones", "headset", "cord", "wire"],
+        "prepNotes": [
+          "Tie them up: Coil them neatly so they don't tangle with other e-waste."
+        ]
+      },
+      {
+        "name": "Burnt Light Bulbs",
+        "image": "/images/items/e-waste/lightbulbs.png",
+        "description": "LED and fluorescent tubes contain trace amounts of hazardous materials.",
+        "tags": ["led", "fluorescent", "bumbilya", "lamp", "ilaw"],
+        "prepNotes": [
+          "Handle with Care: Wrap in old newspaper or its original box to prevent shattering during transport."
+        ]
+      },
+      {
+        "name": "Broken Small Electronics",
+        "image": "/images/items/e-waste/broken-small-electronics.png",
+        "description": "Calculators, old computer mice, broken cellphones, and power banks.",
+        "tags": ["cellphone", "mouse", "keyboard", "calculator", "power bank"],
+        "prepNotes": [
+          "Wipe Data: If disposing of an old phone, try to factory reset it first if it still turns on."
+        ]
+      }
+    ]
   },
   {
     "id": "wrappers",
     "title": "Wrappers",
     "color": "bin-nonbio",
+    "categoryTitle": "Non-Biodegradable",
     "items": "Junk food bags, sachets, dirty styrofoam, foil.",
-    "itemsList": ["Chips Wrapper", "Candy Wrapper", "Shampoo Sachet", "Dirty Styrofoam Box", "Aluminum Foil", "Biscuit Wrapper"],
-    "image": "/images/trash-wrappers.png",
+    "description": "Composite materials, soft plastics, and heavily soiled items that cannot be recycled or composted.",
+    "note": "Note: Always empty liquids from sachets to prevent your trash bin from smelling bad.",
+    "heroImage": "/images/heroes/wrappers-hero.png",
+    "image": "/images/categories/trash-wrappers.png",
     "imgScale": 1.1,
     "imgY": 0,
     "containerTop": "-top-24",
-    "containerHeight": "h-48"
+    "containerHeight": "h-48",
+    "itemsList": [
+      { 
+        "name": "Fast Food Burger Wrappers", 
+        "image": "/images/items/wrappers/fast-food-wrappers.png",
+        "description": "Paper wrappers lined with foil or thin plastic cannot be recycled because of the grease and mixed materials.",
+        "tags": ["yumburger", "cheeseburger", "mcdo", "fries carton", "takeout wrapper"],
+        "prepNotes": [  
+          "Scrape: Remove leftover food scraps (throw those in Food Waste) before tossing the wrapper."
+        ]
+      },
+      { 
+        "name": "Condiment & Sauce Sachets", 
+        "image": "/images/items/wrappers/sauce-sachets.png",
+        "description": "Small tear-open packets for ketchup, gravy, or soy sauce are residual waste. The same applies to single-use shampoo or coffee sachets.",
+        "tags": ["ketchup", "gravy", "soy sauce", "shampoo sachet", "coffee sachet", "twin pack"],
+        "prepNotes": [
+          "Empty Fully: Squeeze out as much of the liquid as possible to prevent a sticky mess."
+        ]
+      },
+      { 
+        "name": "Junk Food Bags", 
+        "image": "/images/items/wrappers/junk-food.png",
+        "description": "Snack bags and candy wrappers have a shiny metallic interior mixed with plastic. This composite material goes straight to residual waste.",
+        "tags": ["chips", "piattos", "doritos", "candy", "vcut", "chicharon", "snack"],
+        "prepNotes": [
+          "Flatten: Roll or fold the empty bag tightly to save space."
+        ]
+      },
+      { 
+        "name": "Dirty Styrofoam", 
+        "image": "/images/items/wrappers/dirty-styrofoam.png",
+        "description": "Styrofoam food containers are extremely difficult to recycle and are generally treated as residual waste.",
+        "tags": ["styro", "takeout box", "foam", "cup noodles"],
+        "prepNotes": [
+          "Empty: Dump out leftover food and soup into the compost/sink before throwing the styro away."
+        ]
+      },
+      { 
+        "name": "Used Aluminum Foil", 
+        "image": "/images/items/wrappers/aluminum-foil.png",
+        "description": "While clean aluminum cans are recyclable, heavily soiled aluminum foil used for cooking or wrapping oily food usually goes to residual waste.",
+        "tags": ["foil", "baking", "ihaw", "lechon manok wrapper"],
+        "prepNotes": [
+          "Crush: Crumple it into a ball to save space."
+        ]
+      }
+    ]
   }
 ]

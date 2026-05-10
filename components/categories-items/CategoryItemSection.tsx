@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion"; // <-- NEW IMPORT
 
 // 1. Updated Interface to support the new item details
 interface TrashItem {
@@ -34,7 +35,7 @@ const tagColors: Record<string, string> = {
 export default function CategoryItemSection({ categoryData }: { categoryData: CategoryData }) {
   const [searchQuery, setSearchQuery] = useState("");
   
-  // NEW STATE: Tracks which item card the user clicked on
+  // Tracks which item card the user clicked on
   const [selectedItem, setSelectedItem] = useState<TrashItem | null>(null);
 
   const filteredItems = categoryData.itemsList.filter((item) =>
@@ -42,7 +43,7 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
   );
 
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-6 py-8 md:py-12 min-h-[calc(100vh-100px)]">
+    <section className="w-full max-w-[1440px] mx-auto px-6 py-8 md:py-12 min-h-[calc(100vh-100px)] relative">
       
       <Link 
         href="/directory" 
@@ -56,14 +57,15 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
 
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
         
-        {/* LEFT COLUMN: The Dynamic Context/Details Card */}
-        <div className="w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden relative transition-all duration-300">
+        {/* LEFT COLUMN: The Dynamic Context/Details Card (Sticky on Desktop) */}
+        {/* Hidden on mobile when an item is selected, so it doesn't distract from the drawer */}
+        <div className={`w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-white rounded-[32px] shadow-[0_8px_30px_rgb(0,0,0,0.08)] overflow-hidden relative transition-all duration-300 lg:sticky lg:top-8 ${selectedItem ? "hidden lg:block" : "block"}`}>
           
-          {/* Close Button (Only shows if an item is selected) */}
+          {/* Close Button (Desktop Only) */}
           {selectedItem && (
             <button 
               onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 z-20 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-gray-100 transition-colors shadow-sm"
+              className="absolute top-4 right-4 z-20 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-gray-100 transition-colors shadow-sm hidden lg:block"
               aria-label="Close item details"
             >
               <svg className="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,10 +77,15 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
           {/* Dynamic Image Box */}
           <div className="w-full h-48 md:h-64 bg-gray-100 relative overflow-hidden">
             {selectedItem ? (
-              /* State 1: Show the Specific Item Image (using object-contain so it doesn't crop) */
               selectedItem.image ? (
-                <div className="absolute inset-0 bg-white">
-                  <Image src={selectedItem.image} alt={selectedItem.name} fill className="object-contain p-6" priority />
+                <div className="absolute inset-0">
+                  <Image 
+                    src={selectedItem.image} 
+                    alt={selectedItem.name} 
+                    fill 
+                    className="object-cover mix-blend-multiply" 
+                    priority 
+                  />
                 </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-gray-400 font-body text-sm bg-gray-50">
@@ -86,7 +93,6 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
                 </div>
               )
             ) : (
-              /* State 2: Show the Default Category Hero Image */
               categoryData.heroImage ? (
                 <Image src={categoryData.heroImage} alt={`${categoryData.title} hero`} fill className="object-cover" priority />
               ) : (
@@ -112,14 +118,12 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
                 : categoryData.description}
             </p>
 
-            {/* Dynamic Bottom Note: Shows prep list for items, or general note for category */}
             {selectedItem ? (
               selectedItem.prepNotes && selectedItem.prepNotes.length > 0 && (
                 <div className="font-body text-xs md:text-sm text-foreground/80 leading-relaxed">
                   <p className="italic mb-2 text-foreground/60">How to prep:</p>
                   <ul className="flex flex-col gap-2">
                     {selectedItem.prepNotes.map((note, idx) => {
-                      // Split the string to bold the first word before the colon (e.g. "Empty:")
                       const splitNote = note.split(":");
                       return (
                         <li key={idx} className="flex items-start">
@@ -164,30 +168,27 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
           </div>
 
           {filteredItems.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            // MOBILE SCROLL FIX: Added max-h-[60vh] and overflow-y-auto, while hiding the scrollbar visually for a cleaner look
+            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 max-h-[60vh] overflow-y-auto lg:max-h-none lg:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {filteredItems.map((item, index) => {
-                // Determine if this specific card is the active one
                 const isActive = selectedItem?.name === item.name;
 
                 return (
                   <div 
                     key={index}
                     onClick={() => setSelectedItem(item)}
-                    // 1. DYNAMIC STATES: Default, Hover, and Active completely separated
                     className={`relative rounded-2xl p-4 transition-all duration-300 flex flex-col items-center gap-4 cursor-pointer group ${
                       isActive 
-                        ? "bg-[#f0f5ff] border-2 border-[#4A85F6] shadow-[0_8px_20px_rgba(74,133,246,0.15)] -translate-y-1 ring-4 ring-[#4A85F6]/10" 
+                        ? "bg-[#f0f5ff] border-2 border-[#4A85F6] shadow-[0_8px_20px_rgba(74,133,246,0.15)] -translate-y-1 lg:ring-4 lg:ring-[#4A85F6]/10" 
                         : "bg-white border-2 border-transparent shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:-translate-y-1 hover:shadow-[0_12px_25px_rgba(0,0,0,0.06)] hover:border-foreground/10"
                     }`}
                   >
-                    {/* 2. IMAGE CONTAINER */}
                     <div className="w-full aspect-square rounded-xl flex items-center justify-center overflow-hidden relative">
                       {item.image ? (
                         <Image 
                           src={item.image} 
                           alt={item.name} 
                           fill 
-                          // 3. THE MAGIC TRICK: mix-blend-multiply makes white backgrounds disappear
                           className="object-contain p-2 md:p-4 mix-blend-multiply group-hover:scale-110 transition-transform duration-500 ease-out" 
                         />
                       ) : (
@@ -195,7 +196,6 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
                       )}
                     </div>
 
-                    {/* 4. TEXT LABEL */}
                     <p className={`font-body text-sm font-medium text-center line-clamp-2 transition-colors ${
                       isActive ? "text-[#4A85F6]" : "text-foreground group-hover:text-[#4A85F6]"
                     }`}>
@@ -217,9 +217,96 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
                 </Link>
             </div>
           )}
-
         </div>
       </div>
+
+      {/* MOBILE BOTTOM DRAWER (Framer Motion) */}
+      <AnimatePresence>
+        {selectedItem && (
+          <>
+            {/* Dark Overlay Background */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedItem(null)}
+              className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+            />
+            
+            {/* The Sliding Drawer */}
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              drag="y"
+              
+              // 1. UPDATED: Resist dragging UP, but allow free dragging DOWN
+              dragConstraints={{ top: 0, bottom: 0 }} 
+              dragElastic={{ top: 0.1, bottom: 1 }} 
+              
+              onDragEnd={(e, info) => {
+                // 2. UPDATED: Close if dragged down 100px OR if flicked down quickly (> 500 velocity)
+                if (info.offset.y > 100 || info.velocity.y > 500) {
+                  setSelectedItem(null);
+                }
+              }}
+              className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-[32px] shadow-[0_-8px_30px_rgb(0,0,0,0.12)] h-[80vh] flex flex-col lg:hidden"
+            >
+              {/* Drag Handle Bar */}
+              <div className="w-full flex justify-center pt-4 pb-2 shrink-0">
+                <div className="w-12 h-1.5 bg-gray-300 rounded-full" />
+              </div>
+
+              {/* Scrollable Content Inside Drawer */}
+              <div className="overflow-y-auto px-6 pb-12">
+                <div className="w-full h-48 relative mb-6">
+                  {selectedItem.image ? (
+                    <Image src={selectedItem.image} alt={selectedItem.name} fill className="object-cover mix-blend-multiply" priority />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-50 rounded-2xl text-gray-400 text-sm">No Image</div>
+                  )}
+                </div>
+
+                <h2 className="font-heading text-3xl font-bold text-foreground mb-1">
+                  {selectedItem.name}
+                </h2>
+                <p className={`font-heading text-base font-bold mb-6 ${tagColors[categoryData.color] || "text-foreground"}`}>
+                  {categoryData.categoryTitle}
+                </p>
+
+                <p className="font-body text-sm text-foreground/80 leading-relaxed mb-6">
+                  {selectedItem.description || "No specific details available for this item."}
+                </p>
+
+                {selectedItem.prepNotes && selectedItem.prepNotes.length > 0 && (
+                  <div className="font-body text-sm text-foreground/80 leading-relaxed bg-gray-50 p-4 rounded-2xl">
+                    <p className="italic mb-3 font-medium">How to prep:</p>
+                    <ul className="flex flex-col gap-3">
+                      {selectedItem.prepNotes.map((note, idx) => {
+                        const splitNote = note.split(":");
+                        return (
+                          <li key={idx} className="flex items-start">
+                            <span className="mr-2 mt-[2px] text-foreground/40">•</span>
+                            <span>
+                              {splitNote.length > 1 ? (
+                                <><strong>{splitNote[0]}:</strong>{splitNote.slice(1).join(":")}</>
+                              ) : (
+                                note
+                              )}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }
