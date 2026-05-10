@@ -165,27 +165,45 @@ export default function CategoryItemSection({ categoryData }: { categoryData: Ca
 
           {filteredItems.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {filteredItems.map((item, index) => (
-                <div 
-                  key={index}
-                  // NEW: Click handler triggers the state change
-                  onClick={() => setSelectedItem(item)}
-                  className={`bg-white rounded-2xl p-4 shadow-[0_4px_15px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_25px_rgb(0,0,0,0.08)] transition-all flex flex-col items-center gap-4 border group cursor-pointer ${
-                    selectedItem?.name === item.name ? "border-[#4A85F6] ring-2 ring-[#4A85F6]/20" : "border-foreground/5"
-                  }`}
-                >
-                  <div className="w-full aspect-square bg-foreground/5 rounded-xl flex items-center justify-center overflow-hidden relative">
-                    {item.image ? (
-                        <Image src={item.image} alt={item.name} fill className="object-contain p-4 group-hover:scale-105 transition-transform" />
-                    ) : (
+              {filteredItems.map((item, index) => {
+                // Determine if this specific card is the active one
+                const isActive = selectedItem?.name === item.name;
+
+                return (
+                  <div 
+                    key={index}
+                    onClick={() => setSelectedItem(item)}
+                    // 1. DYNAMIC STATES: Default, Hover, and Active completely separated
+                    className={`relative rounded-2xl p-4 transition-all duration-300 flex flex-col items-center gap-4 cursor-pointer group ${
+                      isActive 
+                        ? "bg-[#f0f5ff] border-2 border-[#4A85F6] shadow-[0_8px_20px_rgba(74,133,246,0.15)] -translate-y-1 ring-4 ring-[#4A85F6]/10" 
+                        : "bg-white border-2 border-transparent shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:-translate-y-1 hover:shadow-[0_12px_25px_rgba(0,0,0,0.06)] hover:border-foreground/10"
+                    }`}
+                  >
+                    {/* 2. IMAGE CONTAINER */}
+                    <div className="w-full aspect-square rounded-xl flex items-center justify-center overflow-hidden relative">
+                      {item.image ? (
+                        <Image 
+                          src={item.image} 
+                          alt={item.name} 
+                          fill 
+                          // 3. THE MAGIC TRICK: mix-blend-multiply makes white backgrounds disappear
+                          className="object-contain p-2 md:p-4 mix-blend-multiply group-hover:scale-110 transition-transform duration-500 ease-out" 
+                        />
+                      ) : (
                         <span className="text-xs text-foreground/40">No Img</span>
-                    )}
+                      )}
+                    </div>
+
+                    {/* 4. TEXT LABEL */}
+                    <p className={`font-body text-sm font-medium text-center line-clamp-2 transition-colors ${
+                      isActive ? "text-[#4A85F6]" : "text-foreground group-hover:text-[#4A85F6]"
+                    }`}>
+                      {item.name}
+                    </p>
                   </div>
-                  <p className="font-body text-sm font-medium text-foreground text-center line-clamp-2">
-                    {item.name}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="w-full py-16 flex flex-col items-center justify-center bg-white rounded-3xl border border-dashed border-foreground/20 text-center px-4">

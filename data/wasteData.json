@@ -10,7 +10,7 @@
     "itemsList": [
       { 
         "name": "Plastic Water Bottle", 
-        "image": "/images/items/water-bottle.png",
+        "image": "/images/items/plastics/plastic-water-bottles.png",
         "description": "Clear plastic bottles (PET) are highly recyclable. Please prep them before throwing them away to maximize bin space!",
         "prepNotes": [
           "Empty: Pour out any leftover water (liquids ruin other recyclables!).",
@@ -18,12 +18,47 @@
           "Cap: Screw the cap back on to keep the bottle crushed (caps are recyclable too)."
         ]
       },
-      { "name": "Milk Tea Cup", "image": "" },
-      { "name": "Plastic Spoon/Fork", "image": "" },
-      { "name": "Clean Food Tupperware", "image": "" },
-      { "name": "Iced Coffee Cup", "image": "" }
+      { 
+        "name": "Milk Tea Cup", 
+        "image": "/images/items/plastics/milktea-cup.png",
+        "description": "Thick plastic cups used for milk tea are recyclable, but the sugary residue and plastic sealing film can contaminate the recycling batch.",
+        "prepNotes": [
+          "Empty: Pour out all leftover tea, ice, and tapioca pearls into the sink or compost.",
+          "Remove Film: Peel off the soft plastic sealing film (this goes in the Non-Biodegradable bin).",
+          "Rinse: Give the cup a quick rinse to remove sticky sugar."
+        ]
+      },
+      { 
+        "name": "Plastic Spoon/Fork", 
+        "image": "/images/items/plastics/plastic-cutlery.jpg",
+        "description": "Rigid plastic cutlery can be recycled, but they must be completely free of food residue. (Note: Extremely flimsy plastic spoons may need to go to Non-Biodegradable depending on local facilities).",
+        "prepNotes": [
+          "Wipe or Rinse: Wash off all oils, sauces, and food bits.",
+          "Dry: Shake off excess water before tossing them in the bin."
+        ]
+      },
+      { 
+        "name": "Clean Food Tupperware", 
+        "image": "/images/items/plastics/tupperware.png",
+        "description": "Heavy-duty microwaveable plastic tubs (like the ones from takeout restaurants) are excellent for recycling, provided they are not greasy.",
+        "prepNotes": [
+          "Wash: Thoroughly wash with soap and water to remove all oil. Oil ruins the plastic recycling process.",
+          "Dry: Ensure the container is fully dry.",
+          "Separate: Detach the lid from the base before throwing them in."
+        ]
+      },
+      { 
+        "name": "Plastic Soda Bottle", 
+        "image": "/images/items/plastics/soda-bottles.jpg",
+        "description": "Just like water bottles, plastic soda bottles are highly valuable for recycling. Because soda is sticky, a little extra care is needed to keep the recycling bin clean and pest-free.",
+        "prepNotes": [
+          "Empty: Pour out any leftover soda completely into the sink.",
+          "Rinse: Give it a quick swirl with water to remove the sticky syrup.",
+          "Crush & Cap: Squeeze the air out to flatten the bottle, then screw the cap back on to save space and keep the cap in the recycling loop."
+        ]
+      }
     ],
-    "heroImage": "/images/page-plasticbottles.jpg",
+    "heroImage": "/images/items/plastics/plastics-hero-card.jpg",
     "image": "/images/trash-plastics.png",
     "imgScale": 1.2,
     "imgY": 16,
