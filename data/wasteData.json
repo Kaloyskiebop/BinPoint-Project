@@ -3,8 +3,27 @@
     "id": "plastics",
     "title": "Plastics",
     "color": "bin-recyclable",
+    "categoryTitle": "Recyclable",
     "items": "Water bottles, milk tea cups, clean food containers.",
-    "itemsList": ["Plastic Water Bottle", "Milk Tea Cup", "Plastic Spoon/Fork", "Clean Food Tupperware", "Iced Coffee Cup"],
+    "description": "Only clean, rigid plastics belong here. If the item holds its shape (like a bottle or a cup), drop it in. Make sure to empty all liquids and food residue first.",
+    "note": "Note: Soft, crinkly plastics like wrappers and sachets go in the Non-Biodegradable (Black) bin.",
+    "itemsList": [
+      { 
+        "name": "Plastic Water Bottle", 
+        "image": "/images/items/water-bottle.png",
+        "description": "Clear plastic bottles (PET) are highly recyclable. Please prep them before throwing them away to maximize bin space!",
+        "prepNotes": [
+          "Empty: Pour out any leftover water (liquids ruin other recyclables!).",
+          "Crush: Twist or flatten the bottle to save space.",
+          "Cap: Screw the cap back on to keep the bottle crushed (caps are recyclable too)."
+        ]
+      },
+      { "name": "Milk Tea Cup", "image": "" },
+      { "name": "Plastic Spoon/Fork", "image": "" },
+      { "name": "Clean Food Tupperware", "image": "" },
+      { "name": "Iced Coffee Cup", "image": "" }
+    ],
+    "heroImage": "/images/page-plasticbottles.jpg",
     "image": "/images/trash-plastics.png",
     "imgScale": 1.2,
     "imgY": 16,

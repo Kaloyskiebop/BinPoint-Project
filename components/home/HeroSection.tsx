@@ -5,14 +5,17 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import wasteData from "@/data/wasteData.json";
 
-// Flatten JSON for search
 const allSearchableItems = wasteData.flatMap((category) => 
-  category.itemsList.map((itemName) => ({
-    name: itemName,
-    categoryId: category.id,
-    categoryTitle: category.title,
-    color: category.color
-  }))
+  category.itemsList.map((item) => {
+    const actualName = typeof item === 'string' ? item : item.name;
+    
+    return {
+      name: actualName,
+      categoryId: category.id,
+      categoryTitle: category.title,
+      color: category.color
+    };
+  })
 );
 
 const colorMap: Record<string, string> = {
