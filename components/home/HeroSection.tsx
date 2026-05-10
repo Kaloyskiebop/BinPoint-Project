@@ -122,7 +122,7 @@ export default function HeroSection() {
         <div className="relative w-full h-full">
           
           <div className="group absolute top-[8%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-10 transition-transform hover:scale-105 duration-300">
-            <Image src="/images/bio.png" alt="Bio" width={500} height={500} className="object-contain drop-shadow-xl" priority />
+            <Image src="/images/heroes/bio.png" alt="Bio" width={500} height={500} className="object-contain drop-shadow-xl" priority />
             <div className="absolute top-[10%] right-[-25%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
               <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-bio text-bin-bio font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
                 Biodegradable
@@ -131,7 +131,7 @@ export default function HeroSection() {
           </div>
 
           <div className="group absolute top-[25%] left-[-3%] w-[50%] h-auto z-20 transition-transform hover:scale-105 duration-300">
-            <Image src="/images/recyclable.png" alt="Recyclable" width={500} height={500} className="object-contain drop-shadow-xl" priority />
+            <Image src="/images/heroes/recyclable.png" alt="Recyclable" width={500} height={500} className="object-contain drop-shadow-xl" priority />
             <div className="absolute top-[10%] left-[20%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
               <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-recyclable text-bin-recyclable font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
                 Recyclable
@@ -140,7 +140,7 @@ export default function HeroSection() {
           </div>
 
           <div className="group absolute top-[25%] right-[-3%] w-[50%] h-auto z-30 transition-transform hover:scale-105 duration-300">
-            <Image src="/images/ewaste1.png" alt="E-waste" width={500} height={500} className="object-contain drop-shadow-xl" priority />
+            <Image src="/images/heroes/ewaste1.png" alt="E-waste" width={500} height={500} className="object-contain drop-shadow-xl" priority />
             <div className="absolute top-[10%] right-[-15%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
               <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-ewaste text-bin-ewaste font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
                 E-Waste
@@ -149,7 +149,7 @@ export default function HeroSection() {
           </div>
 
           <div className="group absolute top-[43%] left-1/2 -translate-x-1/2 w-[50%] h-auto z-40 transition-transform hover:scale-105 duration-300">
-            <Image src="/images/nonbio.png" alt="Non-bio" width={500} height={500} className="object-contain drop-shadow-2xl" priority />
+            <Image src="/images/heroes/nonbio.png" alt="Non-bio" width={500} height={500} className="object-contain drop-shadow-2xl" priority />
             <div className="absolute top-[10%] left-[20%] -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
               <span className="bg-background/90 backdrop-blur-sm border-2 border-bin-nonbio text-bin-nonbio font-heading font-semibold px-3 py-1 rounded-lg shadow-sm whitespace-nowrap text-xs md:text-sm lg:text-base">
                 Non-Biodegradable
