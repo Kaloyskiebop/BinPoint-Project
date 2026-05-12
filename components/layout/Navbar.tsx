@@ -100,7 +100,7 @@ export default function Navbar() {
     };
 
   return (
-    <nav className="w-full px-8 py-6 flex justify-between items-center max-w-[1440px] mx-auto bg-background sticky top-0 z-50">
+    <nav className="w-full px-8 py-6 flex justify-between items-center max-w-[1440px] mx-auto bg-background sticky top-0 z-99">
       <Link href="/" className="cursor-pointer">
         <Image src="/images/logo.png" alt="BinPoint Logo" height={18} width={130} priority className="h-8 w-auto object-contain" />
       </Link>
