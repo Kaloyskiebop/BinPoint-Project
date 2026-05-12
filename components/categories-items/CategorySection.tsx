@@ -40,12 +40,13 @@ export default function CategorySection() {
             Waste Categories
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-x-8 gap-y-32">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-20 sm:gap-x-8 sm:gap-y-32">
           {wasteData.map((cat) => (
             <Link 
               href={`/directory/${cat.id}`} 
               key={cat.id}
-              className="relative w-full sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-[260px] block"
+              /* STRICT FIX: Restored lg:w-[calc(25%-1.5rem)] so desktop perfectly fits 4 items per row again */
+              className="relative w-[calc(50%-0.5rem)] sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] max-w-[260px] block"
             >
               <motion.div 
                 initial="closed"
@@ -53,8 +54,20 @@ export default function CategorySection() {
                 className="group cursor-pointer h-full"
               >
                 
-                {/* TRASH ASSET LAYER */}
-                <div className={`absolute left-1/2 -translate-x-1/2 w-full z-20 pointer-events-none transition-transform duration-500 group-hover:scale-110 ${cat.containerTop} ${cat.containerHeight}`}>
+                {/* --- TRASH ASSET LAYERS --- */}
+                
+                {/* 1. MOBILE IMAGE (Hidden on sm screens and larger) */}
+                <div className={`absolute left-1/2 -translate-x-1/2 w-full z-20 pointer-events-none transition-transform duration-500 group-hover:-translate-y-2 sm:hidden ${cat.mobileContainerTop} ${cat.mobileContainerHeight}`}>
+                  <div 
+                    className="relative w-full h-full" 
+                    style={{ transform: `scale(${cat.mobileImgScale}) translateY(${cat.mobileImgY}px)` }}
+                  >
+                    <Image src={cat.image} alt={cat.title} fill className="object-contain" priority />
+                  </div>
+                </div>
+
+                {/* 2. DESKTOP IMAGE (Hidden on mobile screens) */}
+                <div className={`absolute left-1/2 -translate-x-1/2 w-full z-20 pointer-events-none transition-transform duration-500 group-hover:scale-110 hidden sm:block ${cat.containerTop} ${cat.containerHeight}`}>
                   <div 
                     className="relative w-full h-full" 
                     style={{ transform: `scale(${cat.imgScale}) translateY(${cat.imgY}px)` }}
@@ -63,48 +76,39 @@ export default function CategorySection() {
                   </div>
                 </div>
 
+
                 {/* CARD BASE LAYER */}
-                <div className="relative bg-background rounded-[32px] pt-28 pb-10 px-8 shadow-[4px_4px_14.8px_4px_rgba(0,0,0,0.45)] h-full overflow-hidden">
+                <div className="relative bg-background rounded-[24px] sm:rounded-[32px] pt-16 pb-6 px-3 sm:pt-28 sm:pb-10 sm:px-8 shadow-[4px_4px_14.8px_4px_rgba(0,0,0,0.15)] sm:shadow-[4px_4px_14.8px_4px_rgba(0,0,0,0.45)] h-full overflow-hidden">
                   
-                  {/* ANIMATED BACKGROUND (Using the colorMap safely!) */}
                   <motion.div 
                     variants={cardBackgroundVariants}
                     className={`absolute inset-0 ${colorMap[cat.color]} z-0`}
                   />
 
                   {/* CONTENT LAYER */}
-                  <div className="relative z-10 flex flex-col items-center h-full">
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full">
                     
                     {/* Header Row */}
                     <div className="flex items-center justify-center gap-0 transition-all duration-500 ease-in-out group-hover:text-white">
                       
-                      {/* Indicator Dot (Also using colorMap safely) */}
+                      {/* Indicator Dot */}
                       <motion.div 
-                        className={`rounded-full ${colorMap[cat.color]}`}
+                        className={`rounded-full hidden sm:block ${colorMap[cat.color]}`}
                         variants={{ 
-                          open: { 
-                            opacity: 0, 
-                            width: 0, 
-                            height: 16, 
-                            marginRight: 0 
-                          }, 
-                          closed: { 
-                            opacity: 1, 
-                            width: 16, 
-                            height: 16, 
-                            marginRight: 12 
-                          } 
+                          open: { opacity: 0, width: 0, height: 16, marginRight: 0 }, 
+                          closed: { opacity: 1, width: 16, height: 16, marginRight: 12 } 
                         }}
                         transition={{ duration: 0.3 }}
                       />
                       
-                      <h4 className="font-bold text-2xl font-bold whitespace-nowrap">
+                      {/* Title */}
+                      <h4 className="font-bold text-base sm:text-2xl whitespace-nowrap">
                         {cat.title}
                       </h4>
                     </div>
 
                     {/* Description Paragraph */}
-                    <p className="mt-4 font-body text-sm text-foreground/70 text-center leading-relaxed transition-all duration-500 group-hover:text-white">
+                    <p className="mt-2 sm:mt-4 font-body text-[11px] sm:text-sm text-foreground/70 text-center leading-relaxed transition-all duration-500 group-hover:text-white line-clamp-2 sm:line-clamp-none">
                       {cat.items}
                     </p>
                   </div>

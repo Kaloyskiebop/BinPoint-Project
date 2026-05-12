@@ -13,6 +13,10 @@
     "imgY": 16,
     "containerTop": "-top-20",
     "containerHeight": "h-40",
+    "mobileImgScale": 0.85,
+    "mobileImgY": -5,
+    "mobileContainerTop": "-top-12",
+    "mobileContainerHeight": "h-28",
     "itemsList": [
       { 
         "name": "Plastic Water Bottle", 
@@ -83,6 +87,10 @@
     "imgY": 0,
     "containerTop": "-top-24",
     "containerHeight": "h-48",
+    "mobileImgScale": 0.85,
+    "mobileImgY": -15,
+    "mobileContainerTop": "-top-16",
+    "mobileContainerHeight": "h-32",
     "itemsList": [
       {
         "name": "Cardboard Boxes",
@@ -157,6 +165,10 @@
     "imgY": -8,
     "containerTop": "-top-20",
     "containerHeight": "h-40",
+    "mobileImgScale": 0.9,
+    "mobileImgY": -10,
+    "mobileContainerTop": "-top-12",
+    "mobileContainerHeight": "h-28",
     "itemsList": [
       {
         "name": "Aluminum Soda Cans",
@@ -213,6 +225,10 @@
     "imgY": -8,
     "containerTop": "-top-20",
     "containerHeight": "h-40",
+    "mobileImgScale": 0.9,
+    "mobileImgY": -10,
+    "mobileContainerTop": "-top-12",
+    "mobileContainerHeight": "h-28",
     "itemsList": [
       { 
         "name": "Leftover Rice", 
@@ -285,6 +301,10 @@
     "imgY": 0,
     "containerTop": "-top-24",
     "containerHeight": "h-48",
+    "mobileImgScale": 0.85,
+    "mobileImgY": -15,
+    "mobileContainerTop": "-top-16",
+    "mobileContainerHeight": "h-32",
     "itemsList": [
       {
         "name": "Household Batteries",
@@ -338,6 +358,10 @@
     "imgY": 0,
     "containerTop": "-top-24",
     "containerHeight": "h-48",
+    "mobileImgScale": 0.85,
+    "mobileImgY": -15,
+    "mobileContainerTop": "-top-16",
+    "mobileContainerHeight": "h-32",
     "itemsList": [
       { 
         "name": "Fast Food Burger Wrappers", 
